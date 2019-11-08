@@ -55,7 +55,24 @@ function getTasks() {
     .from('tasks')
     .join('projects', 'project_tasks.project_id', '=', 'projects.id')
     .join('project_tasks', 'task_id', '=', 'tasks.id')
+    .then(tasks => tasks.map(each => {
+        if (each.completed === 0) {
+            return {
+                ...each,
+                completed: false
+            }
+        } else {
+            return {
+                ...each,
+                completed: true
+            }
+        }
+    }))
 
+}
+
+function addTask(task) {
+    return db('tasks').insert(task)
 }
 
 
@@ -65,4 +82,5 @@ module.exports = {
     getProjects,
     addProject,
     getTasks,
+    addTask,
 }

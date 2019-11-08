@@ -9,4 +9,10 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({ error: 'Failed to get tasks'}))
 })
 
+router.post('/', (req, res) => {
+    Tasks.addTask(req.body)
+    .then(added => res.status(200).json(added))
+    .catch(err => res.status(500).json({ error: 'Failed to add task'}))
+})
+
 module.exports = router;
