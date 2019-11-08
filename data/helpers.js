@@ -6,6 +6,11 @@ function getResources() {
     .from('resources')
 }
 
+function addResource(resource) {
+    return db('resources').insert(resource)
+}
+
 module.exports = {
     getResources,
+    addResource,
 }

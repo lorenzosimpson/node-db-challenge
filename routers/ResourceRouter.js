@@ -9,4 +9,10 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({ error: 'Failed to get resources'}))
 })
 
+router.post('/', (req, res) => {
+    Resources.addResource(req.body)
+    .then(added => res.status(201).json(added))
+    .catch(err => res.status(500).json({ error: 'Failed to add resource'}))
+})
+
 module.exports = router;
