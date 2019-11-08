@@ -49,26 +49,33 @@ from tasks
  join project_tasks on task_id = tasks.id;
 */
 
+// function getTasks() {
+//     return db
+//     .select('tasks.*', 'projects.name as project_name', 'projects.description as project_description')
+//     .from('tasks')
+//     .join('projects', 'project_tasks.project_id', '=', 'projects.id')
+//     .join('project_tasks', 'task_id', '=', 'tasks.id')
+//     .then(tasks => tasks.map(each => {
+//         if (each.completed === 0) {
+//             return {
+//                 ...each,
+//                 completed: false
+//             }
+//         } else {
+//             return {
+//                 ...each,
+//                 completed: true
+//             }
+//         }
+//     }))
+
+// }
+
 function getTasks() {
     return db
     .select('tasks.*', 'projects.name as project_name', 'projects.description as project_description')
     .from('tasks')
-    .join('projects', 'project_tasks.project_id', '=', 'projects.id')
-    .join('project_tasks', 'task_id', '=', 'tasks.id')
-    .then(tasks => tasks.map(each => {
-        if (each.completed === 0) {
-            return {
-                ...each,
-                completed: false
-            }
-        } else {
-            return {
-                ...each,
-                completed: true
-            }
-        }
-    }))
-
+    .join('projects', 'project_id', 'projects.id')
 }
 
 function addTask(task) {

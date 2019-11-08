@@ -23,6 +23,14 @@ exports.up = function(knex) {
         .notNullable()
       tbl.string('notes')
       tbl.boolean('completed').defaultTo(false)
+      tbl.integer('project_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('projects')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
+      
   })
 };
 
