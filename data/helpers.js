@@ -26,17 +26,17 @@ function addProject(project) {
 
 // RESOURCES
 /*
-select description as task_description, name as project_name, projects.description as project_description
+select description as task_description, name as project_name, projects.description as project_description, completed
 from tasks
-join project_tasks on task_id = tasks.id
-join projects on project_tasks.id = projects.id;
+ join projects on project_tasks.project_id = projects.id 
+ join project_tasks on task_id = tasks.id;
 */
 
 function getTasks() {
     return db
-    .select('*')
+    .select('tasks.*', 'projects.name as project_name', 'projects.description as project_description')
     .from('tasks')
-    .join('projects', 'project_tasks.id', '=', 'projects.id')
+    .join('projects', 'project_tasks.project_id', '=', 'projects.id')
     .join('project_tasks', 'task_id', '=', 'tasks.id')
 
 }
