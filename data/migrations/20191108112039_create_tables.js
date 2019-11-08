@@ -5,7 +5,6 @@ exports.up = function(knex) {
   .createTable('resources', tbl => {
       tbl.increments()
       tbl.string('name')
-        .unique()
         .notNullable()
       tbl.string('description')
   })
