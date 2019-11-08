@@ -1,5 +1,9 @@
 const db = require('./db-config')
 
+function intToBoolean(int) {
+    return int === 1 ? true : false;
+  }
+
 // RESOURCES
 function getResources() {
     return db
@@ -18,6 +22,19 @@ function getProjects() {
     return db
     .select('*')
     .from('projects')
+    .then(projects => projects.map(each => {
+        if (each.completed === 0) {
+            return {
+                ...each,
+                completed: false
+            }
+        } else {
+            return {
+                ...each,
+                completed: true
+            }
+        }
+    }))
 }
 
 function addProject(project) {
