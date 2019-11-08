@@ -43,10 +43,10 @@ function addProject(project) {
 
 // RESOURCES
 /*
+select *
 select description as task_description, name as project_name, projects.description as project_description, completed
 from tasks
- join projects on project_tasks.project_id = projects.id 
- join project_tasks on task_id = tasks.id;
+join projects on project_id = projects.id;
 */
 
 
