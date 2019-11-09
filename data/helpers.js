@@ -23,16 +23,10 @@ function getProjects() {
     .select('*')
     .from('projects')
     .then(projects => projects.map(each => {
-        if (each.completed === 0) {
-            return {
-                ...each,
-                completed: false
-            }
-        } else {
-            return {
-                ...each,
-                completed: true
-            }
+        let completed = each.completed !== 0
+        return {
+            ...each,
+            completed
         }
     }))
 }
@@ -41,7 +35,7 @@ function addProject(project) {
     return db('projects').insert(project)
 }
 
-// RESOURCES
+
 /*
 select *
 select description as task_description, name as project_name, projects.description as project_description, completed
@@ -56,16 +50,10 @@ function getTasks() {
     .from('tasks')
     .join('projects', 'project_id', 'projects.id')
     .then(tasks => tasks.map(each => {
-        if (each.completed === 0) {
-            return {
-                ...each,
-                completed: false
-            }
-        } else {
-            return {
-                ...each,
-                completed: true
-            }
+        let completed = each.completed !== 0
+        return {
+            ...each,
+            completed
         }
     }))
 }
